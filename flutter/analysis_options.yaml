@@ -1,5 +1,0 @@
-include: package:supernova/lints.yaml
-
-dart_code_metrics:
-  rules:
-    binary-expression-operand-order: false

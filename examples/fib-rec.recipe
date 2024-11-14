@@ -1,6 +1,6 @@
 | Fibonacci
 
-moveib a 20
+moveib a 45
 call fib
 syscall 0
 
