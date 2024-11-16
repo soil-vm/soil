@@ -12,3 +12,5 @@ zig/zig-cache
 zig/zig-out
 
 rust/target
+
+*.pdf
