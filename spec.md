@@ -9,6 +9,11 @@ This gives Soil implementations the freedom to compile the byte code to machine 
 
 Soil binaries are files that contain byte code and initial memory.
 
+## Data Types
+
+Soil uses two types of integers. A _byte_ is 8 bits and a _word_ is 8 bytes. Data types in Soil
+are little endian. Registers and pointers are word-sized.
+
 ## Registers
 
 Soil has 8 registers, all of which hold 64 bits.
@@ -24,19 +29,24 @@ Soil has 8 registers, all of which hold 64 bits.
 | `e`  | general-purpose register |
 | `f`  | general-purpose register |
 
-Initially, `sp` is the memory size.
-All other registers are zero.
+Initially, `sp` holds the memory size.
+All other registers are initialized to zero.
 
 ## Memory
 
-It also has byte-addressed memory.
-For now, the size of the memory is hardcoded to something big.
+Soil uses byte-addressed memory.
+The memory size is defined by the VM implementation.
 
-## Byte Code
+## System Calls
+
+The Soil VM is sandboxed and only allows interactions with the outside world via system calls ("syscalls").
+Syscalls are identified by a byte-sized syscall number. The canonical set of syscalls is defined in [another part of the specification](syscalls.md).
+
+## Instruction Set
 
 Byte code consists of a sequence of instructions.
 
-Soil runs the instructions in sequence, starting from the first.
+Soil executes the instructions in sequence, starting from the first.
 Some instructions alter control flow by jumping to other instructions.
 
 These are all instructions:
@@ -47,7 +57,7 @@ Does nothing.
 
 ### `panic`
 
-Panics.
+End program execution with an error.
 
 ### `trystart catch:word`
 
